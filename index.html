@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>中华民族抗日战争历史时间轴 (1931-1945)</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>中华民族抗日战争历史时间轴</h1>
+            <p class="subtitle">1931年九一八事变 — 1945年日本投降</p>
+        </header>
+
+        <main class="container">
+            <!-- 事件详情展示区 -->
+            <section class="event-detail" id="eventDetail">
+                <div class="detail-header">
+                    <h2 id="eventTitle">选择一个历史事件查看详情</h2>
+                    <button class="close-btn" id="closeDetail">&times;</button>
+                </div>
+                <div class="detail-content">
+                    <div class="event-date" id="eventDate"></div>
+                    <div class="event-description" id="eventDescription">
+                        <p>点击时间轴上的事件节点来查看详细介绍。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 时间轴容器 -->
+            <section class="timeline-container">
+                <div class="timeline-wrapper">
+                    <div class="timeline-track" id="timelineTrack">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-events" id="timelineEvents">
+                            <!-- 事件节点将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 时间轴控制 -->
+                <div class="timeline-controls">
+                    <button class="control-btn" id="zoomIn">放大</button>
+                    <button class="control-btn" id="zoomOut">缩小</button>
+                    <button class="control-btn" id="resetView">重置视图</button>
+                </div>
+
+                <!-- 年份标尺 -->
+                <div class="year-ruler" id="yearRuler">
+                    <!-- 年份标记将通过JavaScript动态生成 -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 抗日战争历史时间轴 - 铭记历史，勿忘国耻</p>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>

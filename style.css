@@ -1,0 +1,369 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    font-weight: 300;
+}
+
+/* 主容器 */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 事件详情区域 */
+.event-detail {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    min-height: 300px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.event-detail.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 1rem;
+}
+
+.detail-header h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    flex: 1;
+}
+
+.close-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #ff3742;
+    transform: scale(1.1);
+}
+
+.event-date {
+    font-size: 1.2rem;
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 25px;
+    display: inline-block;
+}
+
+.event-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #34495e;
+}
+
+.event-description p {
+    margin-bottom: 1rem;
+}
+
+/* 时间轴容器 */
+.timeline-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    min-height: 400px;
+}
+
+.timeline-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.timeline-track {
+    position: relative;
+    width: 3000px; /* 初始宽度，会根据缩放调整 */
+    height: 100%;
+    padding: 50px 0;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        #ff6b6b,
+        #4ecdc4,
+        #45b7d1,
+        #96ceb4,
+        #ffeaa7
+    );
+    border-radius: 2px;
+    transform: translateY(-50%);
+}
+
+.timeline-events {
+    position: relative;
+    height: 100%;
+}
+
+/* 事件节点样式 */
+.event-node {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 4px solid #e74c3c;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.event-node:hover {
+    width: 24px;
+    height: 24px;
+    border-width: 5px;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+}
+
+.event-node.active {
+    background: #e74c3c;
+    border-color: #c0392b;
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
+}
+
+.event-label {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.event-node:hover .event-label {
+    opacity: 1;
+    top: -45px;
+}
+
+/* 时间轴控制按钮 */
+.timeline-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 年份标尺 */
+.year-ruler {
+    position: relative;
+    height: 40px;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.year-ruler::-webkit-scrollbar {
+    height: 6px;
+}
+
+.year-ruler::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.year-ruler::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.year-ruler::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.year-mark {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    padding-left: 0.5rem;
+    white-space: nowrap;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .event-detail {
+        padding: 1.5rem;
+    }
+
+    .detail-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .timeline-wrapper {
+        height: 250px;
+    }
+
+    .timeline-controls {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .control-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 滚动条样式 */
+.timeline-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.event-node.pulse {
+    animation: pulse 2s infinite;
+}
